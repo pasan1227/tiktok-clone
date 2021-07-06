@@ -5,7 +5,7 @@ import Videos from './dbModel.js';
 
 // app config
 const app = express();
-const port = 9000;
+const port = process.env.PORT || 9000;
 
 // middlwares
 app.use(express.json());
@@ -30,7 +30,7 @@ app.get('/',(req, res) => res.status(200).send('hello world'));
 app.get('/v1/posts', (req, res) => res.status(200).send(data));
 
 app.get('/v2/posts', (req, res) => {
-    Videos.find((err, data) => {
+    Videos.find({}, (err, data) => {
         if (err) {
             res.status(500).send(err);
         } else {
